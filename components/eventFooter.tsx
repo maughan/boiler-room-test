@@ -7,7 +7,7 @@ import Row from './row'
 import Typography from './typography'
 
 interface Props {
-  event: Record<string, any>
+  event: DiceEvent
 }
 
 const PriceContainer = styled.div`
