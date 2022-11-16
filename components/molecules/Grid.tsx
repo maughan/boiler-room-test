@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 interface Props {
-  children?: Array<JSX.Element> | JSX.Element
+  children?: React.ReactNode
 }
 
 const Grid: React.FC<Props> = (props: Props) => {

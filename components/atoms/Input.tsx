@@ -1,23 +1,20 @@
 import React, { ChangeEvent } from 'react'
 import styled from 'styled-components'
 
-interface Props {
+interface Props extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
   value: string
   onChange: (value: string) => void
   style?: Record<string, string | number>
 }
 
 const Input: React.FC<Props> = (props: Props) => {
-  const { value, onChange, style } = props
-
-  function handleChange(e: ChangeEvent<HTMLInputElement>) {
-    onChange(e.target.value)
-  }
+  const handleChange = React.useCallback((e: ChangeEvent<HTMLInputElement>) => {
+    props.onChange(e.target.value)
+  }, [props.onChange])
 
   return (
     <StyledInput
-      style={style}
-      value={value}
+      {...props}
       onChange={handleChange}
     />
   )

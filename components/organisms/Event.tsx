@@ -101,6 +101,7 @@ const Event: React.FC<Props> = (props: Props) => {
 
 const Container = styled.div`
   order: 1;
+  width: 100%;
 
   @media (min-width: 768px) {
     width: 40%;

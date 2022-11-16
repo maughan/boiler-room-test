@@ -1,34 +1,22 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Button, Grid, GridItem, Input, Row, RowSpacer, Spacer } from '../components'
+import { Button, Input, Row, RowSpacer, Spacer } from '../components'
+import EventList from '../components/organisms/EventList'
+import { Meta } from '../components/seo'
 
 const Home: React.FC = () => {
-  const [count, setCount] = React.useState(1)
   const [venue, setVenue] = React.useState('')
   const [search, setSearch] = React.useState('')
-  const [more, setMore] = React.useState(false)
-  const items: Array<JSX.Element> = []
 
-  React.useMemo(() => {
-    for (let i = 1; i <= count; i++) {
-      items.push(
-        <GridItem
-          index={i}
-          venue={search}
-          setMore={(more: boolean) => setMore(more)}
-          key={i}
-        />
-      )
-    }
-  }, [items, search])
-
-  async function handleClick() {
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault()
     setSearch(venue)
   }
 
   return (
     <Container>
-      <Header>
+      <Meta />
+      <Header onSubmit={handleSubmit}>
         <Row justify='end'>
           <Input
             value={venue}
@@ -38,24 +26,18 @@ const Home: React.FC = () => {
 
           <RowSpacer size={2} />
 
-          <Button onClick={handleClick}>Search</Button>
+          <Button type='submit'>Search</Button>
         </Row>
       </Header>
 
       <Spacer size={4} />
 
-      <Grid>
-        {items}
-      </Grid>
-
-      <Spacer size={10} />
-
-      {!!more && <Button onClick={() => setCount(count + 1)}>Load more...</Button>}
+      <EventList venue={search} />
     </Container>
   )
 }
 
-const Header = styled.div`
+const Header = styled.form`
   padding: 50px 10vw;
   width: 100%;
 `

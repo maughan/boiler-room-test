@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 interface Props {
   color: 'blue' | 'black'
-  children?: any
+  children?: React.ReactNode
 }
 
 const Tag: React.FC<Props> = (props: Props) => {

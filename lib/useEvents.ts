@@ -1,10 +1,10 @@
-import useSWR, { Fetcher } from 'swr'
+import { useApi } from './useApi'
 
 const baseUrl = 'https://events-api.dice.fm/v1/events'
 const apiKey = 'dHmvC0ZXzF4h1mWldfur13c6s4Ix6wCF4OTzozXC'
 
-export function useEvents<EventsResponse>(query: Query) {
-  const fetcher: Fetcher<EventsResponse, typeof query> = async (query) => {
+export function useEvents(query: Query) {
+  const fetcher = async (query: Query) => {
     const url = baseUrl + '?' + new URLSearchParams(query as Record<string, any>).toString()
     const res = await fetch(url, {
       method: 'GET',
@@ -12,13 +12,14 @@ export function useEvents<EventsResponse>(query: Query) {
         'Content-Type': 'application/json',
         'x-api-key': apiKey,
       },
-    }).catch(err => {
-      throw new Error('An error occured', err)
-    }).then(res => res.json())
+    })
 
-    return res
+    if (!res.ok) {
+      throw new Error('An error occured')
+    }
+
+    return res.json()
   }
 
-  return useSWR<EventsResponse, Error>(query, fetcher)
+  return useApi<EventsResponse, Error>(query, fetcher)
 }
-

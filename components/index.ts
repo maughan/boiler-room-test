@@ -13,13 +13,16 @@ import {
   EventHeader,
   ExpandingPill,
   Grid,
-  GridItem,
   Row,
 } from './molecules'
 
 import {
   Event,
 } from './organisms'
+
+import {
+  Meta,
+} from './seo'
 
 export {
   Button,
@@ -28,8 +31,8 @@ export {
   EventHeader,
   ExpandingPill,
   Grid,
-  GridItem,
   Input,
+  Meta,
   PlayButton,
   Row,
   RowSpacer,

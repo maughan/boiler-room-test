@@ -74,6 +74,7 @@ const Text = styled.p<TextProps>`
   margin: 0;
   color: ${props => props.color ?? 'black'};
   letter-spacing: ${props => props.spacing ?? 0}px;
+  word-break: break-word;
 `
 
 export default Typography

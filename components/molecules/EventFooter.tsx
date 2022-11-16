@@ -13,15 +13,12 @@ const EventFooter: React.FC<Props> = (props: Props) => {
   const { event } = props
 
   const startingPrice = React.useMemo(() => getStartingPrice(event), [event])
-  const currencyString = React.useMemo(() => currencyHelper(startingPrice, event.currency), [event.currency, startingPrice])
-  const buttonText = React.useMemo(() =>
-    moment().isAfter(event.sale_start_date) ?
-      event.sold_out ?
-        'SOLD OUT' :
-        'BOOK NOW' :
-      'GET REMINDED'
-    , [event.sale_start_date, event.sold_out])
-
+  const currencyString = currencyHelper(startingPrice, event.currency)
+  const buttonText = moment().isAfter(event.sale_start_date) ?
+    event.sold_out ?
+      'SOLD OUT' :
+      'BOOK NOW' :
+    'GET REMINDED'
   const showFrom = event.ticket_types.length > 1
 
   return (

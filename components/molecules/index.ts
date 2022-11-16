@@ -2,7 +2,6 @@ import EventFooter from "./EventFooter"
 import EventHeader from './EventHeader'
 import ExpandingPill from "./ExpandingPill"
 import Grid from "./Grid"
-import GridItem from "./GridItem"
 import Row from "./Row"
 
 export {
@@ -10,6 +9,5 @@ export {
   EventHeader,
   ExpandingPill,
   Grid,
-  GridItem,
   Row,
 }

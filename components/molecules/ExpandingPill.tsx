@@ -4,18 +4,18 @@ import styled from 'styled-components'
 interface Props {
   open: boolean
   setOpen: (open: boolean) => void
-  children?: JSX.Element | Array<JSX.Element>
+  children?: React.ReactNode
 }
 
 const ExpandingPill: React.FC<Props> = (props: Props) => {
   const { open, setOpen } = props
 
-  function toggleOpen() {
-    setOpen(!open)
-  }
+  const toggleOpen = React.useCallback((open: boolean) => {
+    setOpen(open)
+  }, [setOpen])
 
   return (
-    <Container open={open} onClick={toggleOpen}>
+    <Container open={open} onClick={() => toggleOpen(!open)}>
       {props.children}
     </Container>
   )
