@@ -2,8 +2,16 @@ import React from 'react'
 import styled from 'styled-components'
 
 interface Props {
-  text: string
   color: 'blue' | 'black'
+  children?: any
+}
+
+const Tag: React.FC<Props> = (props: Props) => {
+  return (
+    <Container {...props}>
+      {props.children}
+    </Container>
+  )
 }
 
 const Container = styled.div<{ color: 'blue' | 'black' }>`
@@ -17,9 +25,5 @@ const Container = styled.div<{ color: 'blue' | 'black' }>`
   font-size: 14px;
   font-weight: 500;
 `
-
-const Tag = (props: Props) => {
-  return <Container {...props}>{props.text}</Container>
-}
 
 export default Tag

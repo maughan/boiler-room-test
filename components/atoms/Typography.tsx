@@ -54,6 +54,18 @@ const typeStyles = {
   }
 }
 
+const Typography: React.FC<TypographyProps> = (props: TypographyProps) => {
+  const { type = 'body' } = props
+
+  const textProps = typeStyles[type]
+
+  return (
+    <Text {...textProps}>
+      {props.children}
+    </Text>
+  )
+}
+
 const Text = styled.p<TextProps>`
   font-size: ${props => props.size}px;
   font-weight: ${props => props.weight};
@@ -63,13 +75,5 @@ const Text = styled.p<TextProps>`
   color: ${props => props.color ?? 'black'};
   letter-spacing: ${props => props.spacing ?? 0}px;
 `
-
-const Typography: React.FC<TypographyProps> = (props: TypographyProps) => {
-  const { type = 'body' } = props
-
-  const textProps = typeStyles[type]
-
-  return <Text {...textProps}>{props.children}</Text>
-}
 
 export default Typography

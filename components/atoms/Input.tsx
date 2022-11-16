@@ -7,6 +7,22 @@ interface Props {
   style?: Record<string, string | number>
 }
 
+const Input: React.FC<Props> = (props: Props) => {
+  const { value, onChange, style } = props
+
+  function handleChange(e: ChangeEvent<HTMLInputElement>) {
+    onChange(e.target.value)
+  }
+
+  return (
+    <StyledInput
+      style={style}
+      value={value}
+      onChange={handleChange}
+    />
+  )
+}
+
 const StyledInput = styled.input`
   outline: none;
   border: none;
@@ -23,15 +39,5 @@ const StyledInput = styled.input`
     width: 500px;
   }
 `
-
-const Input = (props: Props) => {
-  const { value, onChange, style } = props
-
-  function handleChange(e: ChangeEvent<HTMLInputElement>) {
-    onChange(e.target.value)
-  }
-
-  return <StyledInput style={style} value={value} onChange={handleChange} />
-}
 
 export default Input

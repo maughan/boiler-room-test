@@ -2,9 +2,17 @@ import React from 'react'
 import styled from 'styled-components'
 
 interface Props {
-  text: string
   disabled?: boolean
   onClick?: () => void
+  children?: any
+}
+
+const Button: React.FC<Props> = (props: Props) => {
+  return (
+    <StyledButton {...props}>
+      {props.children}
+    </StyledButton>
+  )
 }
 
 const StyledButton = styled.div<{ disabled?: boolean }>`
@@ -22,9 +30,5 @@ const StyledButton = styled.div<{ disabled?: boolean }>`
     ${props => !props.disabled && 'transform: scale(1.05);'}
   }
 `
-
-const Button = (props: Props) => {
-  return <StyledButton {...props}>{props.text}</StyledButton>
-}
 
 export default Button

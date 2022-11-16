@@ -1,10 +1,10 @@
-import useSWR, { Fetcher, SWRResponse } from 'swr'
+import useSWR, { Fetcher } from 'swr'
 
 const baseUrl = 'https://events-api.dice.fm/v1/events'
 const apiKey = 'dHmvC0ZXzF4h1mWldfur13c6s4Ix6wCF4OTzozXC'
 
-export function useEvents<T>(query: Query) {
-  const fetcher: Fetcher<T, typeof query> = async (query) => {
+export function useEvents<EventsResponse>(query: Query) {
+  const fetcher: Fetcher<EventsResponse, typeof query> = async (query) => {
     const url = baseUrl + '?' + new URLSearchParams(query as Record<string, any>).toString()
     const res = await fetch(url, {
       method: 'GET',
@@ -19,6 +19,6 @@ export function useEvents<T>(query: Query) {
     return res
   }
 
-  return useSWR<T, Error>(query, fetcher)
+  return useSWR<EventsResponse, Error>(query, fetcher)
 }
 

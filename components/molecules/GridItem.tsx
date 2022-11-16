@@ -1,7 +1,7 @@
 import React from 'react'
-import { useEvents } from '../lib/useEvents'
-import Event from './event'
-import Typography from './typography'
+import { useEvents } from '../../lib/useEvents'
+import { Event } from '../organisms'
+import { Typography } from '../atoms'
 
 interface Props {
   index: number
@@ -9,7 +9,7 @@ interface Props {
   setMore: (more: boolean) => void
 }
 
-const GridItems = (props: Props) => {
+const GridItem: React.FC<Props> = (props: Props) => {
   const { index, venue, setMore } = props
 
   const query: Query = {
@@ -26,21 +26,23 @@ const GridItems = (props: Props) => {
   if (!data) {
     setMore(false)
 
-    return <>
+    return (
       <Typography type='header'>Loading...</Typography>
-    </>
+    )
   }
 
   if (!data.data || !data.links.next) {
     setMore(false)
-    return <>
+    return (
       <Typography type='header'>No results...</Typography>
-    </>
+    )
   } else {
     setMore(true)
   }
 
-  return data.data.map((item, i) => <Event event={item} key={`${item.name}-${i}`} />)
+  return <>
+    {data.data.map((item, i) => <Event event={item} key={`${item.name}-${i}`} />)}
+  </>
 }
 
-export default GridItems
+export default GridItem
